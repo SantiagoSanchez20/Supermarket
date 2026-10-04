@@ -1,0 +1,103 @@
+import { Repository, DataSource, EntityManager } from 'typeorm';
+import { Inventory } from '../database/entities/inventory.entity';
+import { Product } from '../database/entities/product.entity';
+import { InventoryMovement, MovementType } from '../database/entities/inventory-movement.entity';
+import { RestockingAlert } from '../database/entities/restocking-alert.entity';
+import { StockEntryDto } from './dto/stock-entry.dto';
+import { StockAdjustmentDto } from './dto/stock-adjustment.dto';
+export declare class InventoryService {
+    private readonly inventoryRepo;
+    private readonly productRepo;
+    private readonly movementRepo;
+    private readonly alertRepo;
+    private readonly dataSource;
+    constructor(inventoryRepo: Repository<Inventory>, productRepo: Repository<Product>, movementRepo: Repository<InventoryMovement>, alertRepo: Repository<RestockingAlert>, dataSource: DataSource);
+    getAll(): Promise<{
+        id: string;
+        productId: string;
+        productName: string;
+        sku: string;
+        categoryName: string;
+        supplierName: string;
+        currentStock: number;
+        minStockSafety: number;
+        avgDailySales: number;
+        deliveryLeadTimeDays: number;
+        reorderPoint: number;
+        needsRestock: boolean;
+        isCritical: boolean;
+        updatedAt: Date;
+    }[]>;
+    getByProductId(productId: string): Promise<{
+        id: string;
+        productId: string;
+        productName: string;
+        sku: string;
+        categoryName: string;
+        supplierName: string;
+        currentStock: number;
+        minStockSafety: number;
+        avgDailySales: number;
+        deliveryLeadTimeDays: number;
+        reorderPoint: number;
+        needsRestock: boolean;
+        isCritical: boolean;
+        updatedAt: Date;
+    }>;
+    registerStockEntry(dto: StockEntryDto, userId?: string): Promise<{
+        id: string;
+        productId: string;
+        productName: string;
+        sku: string;
+        categoryName: string;
+        supplierName: string;
+        currentStock: number;
+        minStockSafety: number;
+        avgDailySales: number;
+        deliveryLeadTimeDays: number;
+        reorderPoint: number;
+        needsRestock: boolean;
+        isCritical: boolean;
+        updatedAt: Date;
+    }>;
+    adjustStock(dto: StockAdjustmentDto, userId?: string): Promise<{
+        id: string;
+        productId: string;
+        productName: string;
+        sku: string;
+        categoryName: string;
+        supplierName: string;
+        currentStock: number;
+        minStockSafety: number;
+        avgDailySales: number;
+        deliveryLeadTimeDays: number;
+        reorderPoint: number;
+        needsRestock: boolean;
+        isCritical: boolean;
+        updatedAt: Date;
+    }>;
+    deductStockTransactional(manager: EntityManager, productId: string, quantity: number, saleId: string, userId: string): Promise<{
+        previousStock: number;
+        resultingStock: number;
+    }>;
+    getMovements(productId?: string, limit?: number, offset?: number): Promise<{
+        total: number;
+        limit: number;
+        offset: number;
+        items: {
+            id: string;
+            productId: string;
+            productName: string;
+            sku: string;
+            movementType: MovementType;
+            quantity: number;
+            previousStock: number;
+            resultingStock: number;
+            saleId: string | undefined;
+            userName: string | undefined;
+            notes: string | undefined;
+            createdAt: Date;
+        }[];
+    }>;
+    private mapInventoryWithStatus;
+}

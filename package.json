@@ -1,0 +1,24 @@
+{
+  "name": "smartmarket-root",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Sistema web de gestión inteligente para supermercados - Modelado, Verificación y Pruebas",
+  "scripts": {
+    "docker:up": "docker compose up -d",
+    "docker:down": "docker compose down",
+    "dev:backend": "npm --prefix backend run start:dev",
+    "dev:frontend": "npm --prefix frontend run dev",
+    "build:backend": "npm --prefix backend run build",
+    "build:frontend": "npm --prefix frontend run build",
+    "test:backend": "npm --prefix backend run test"
+  },
+  "keywords": [
+    "supermarket",
+    "pos",
+    "inventory",
+    "promotions",
+    "verification",
+    "testing"
+  ],
+  "author": "Alejandro Botero Camacho & Santiago Sánchez Giraldo"
+}

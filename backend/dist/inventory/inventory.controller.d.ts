@@ -1,0 +1,90 @@
+import { InventoryService } from './inventory.service';
+import { StockEntryDto } from './dto/stock-entry.dto';
+import { StockAdjustmentDto } from './dto/stock-adjustment.dto';
+export declare class InventoryController {
+    private readonly inventoryService;
+    constructor(inventoryService: InventoryService);
+    getAll(): Promise<{
+        id: string;
+        productId: string;
+        productName: string;
+        sku: string;
+        categoryName: string;
+        supplierName: string;
+        currentStock: number;
+        minStockSafety: number;
+        avgDailySales: number;
+        deliveryLeadTimeDays: number;
+        reorderPoint: number;
+        needsRestock: boolean;
+        isCritical: boolean;
+        updatedAt: Date;
+    }[]>;
+    getByProductId(productId: string): Promise<{
+        id: string;
+        productId: string;
+        productName: string;
+        sku: string;
+        categoryName: string;
+        supplierName: string;
+        currentStock: number;
+        minStockSafety: number;
+        avgDailySales: number;
+        deliveryLeadTimeDays: number;
+        reorderPoint: number;
+        needsRestock: boolean;
+        isCritical: boolean;
+        updatedAt: Date;
+    }>;
+    registerStockEntry(dto: StockEntryDto, userId: string): Promise<{
+        id: string;
+        productId: string;
+        productName: string;
+        sku: string;
+        categoryName: string;
+        supplierName: string;
+        currentStock: number;
+        minStockSafety: number;
+        avgDailySales: number;
+        deliveryLeadTimeDays: number;
+        reorderPoint: number;
+        needsRestock: boolean;
+        isCritical: boolean;
+        updatedAt: Date;
+    }>;
+    adjustStock(dto: StockAdjustmentDto, userId: string): Promise<{
+        id: string;
+        productId: string;
+        productName: string;
+        sku: string;
+        categoryName: string;
+        supplierName: string;
+        currentStock: number;
+        minStockSafety: number;
+        avgDailySales: number;
+        deliveryLeadTimeDays: number;
+        reorderPoint: number;
+        needsRestock: boolean;
+        isCritical: boolean;
+        updatedAt: Date;
+    }>;
+    getMovements(productId?: string, limit?: number, offset?: number): Promise<{
+        total: number;
+        limit: number;
+        offset: number;
+        items: {
+            id: string;
+            productId: string;
+            productName: string;
+            sku: string;
+            movementType: import("../database/entities").MovementType;
+            quantity: number;
+            previousStock: number;
+            resultingStock: number;
+            saleId: string | undefined;
+            userName: string | undefined;
+            notes: string | undefined;
+            createdAt: Date;
+        }[];
+    }>;
+}
